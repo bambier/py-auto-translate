@@ -118,10 +118,11 @@ if __name__ == "__main__":
     parser.add_argument('-l', '--languages',
                         help="Language codes", nargs='+', default=["fa", "en"])
     parser.add_argument(
-        '-ll', '--log-level', choices=LOG_LEVELS.keys(), default='NOTSET')
+        '-ll', '--log-level', choices=LOG_LEVELS.keys(), default='NOTSET', help="Loging level")
     parser.add_argument(
-        '-d', '--domain', required=False, default="base")
-    parser.add_argument('-p', '--path', default=BASE_DIR)
+        '-d', '--domain', required=False, default="base", help="Domain of apllication")
+    parser.add_argument('-p', '--path', default=BASE_DIR,
+                        help="path to scan")
 
     args = parser.parse_args()
 
