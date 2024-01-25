@@ -43,7 +43,7 @@ class Transtalor:
 
         except Exception as e:
             self.logger.critical(f'Error while running command.')
-            print(e)
+            self.logger.error(e)
             sys.exit(1)
 
     def get_python_files(self, directory: str) -> typing.List[str]:
