@@ -70,6 +70,10 @@ class Transtalor:
                        f'./locales/{lang}/LC_MESSAGES/{self.domain}.po', *self.get_python_files(self.path)]
             subprocess.run(command)
 
+        command = ['xgettext', '--language=Python', '-d', self.domain, '-o',
+                   f'./locales/{self.domain}.pot', *self.get_python_files(self.path)]
+        subprocess.run(command)
+
     def compile(self) -> None:
         self.logger.info(f'Translating python files with `msgfmt`')
         for lang in self.languages:
