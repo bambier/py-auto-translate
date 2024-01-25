@@ -11,6 +11,7 @@ Python Module to make translation files for all application python files
 ## Architecture
 ```mermaid
   graph TD;
+    Path --> Translator;
     Translator --> File1;
     Translator --> File2;
     Translator --> File3;
@@ -22,7 +23,7 @@ Python Module to make translation files for all application python files
     Translate --> .po;
     Translate --> .pot;
     .po --> Compile;
-    .pot --> Compile;
+
     Compile --> .mo
     
 
