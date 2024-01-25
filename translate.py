@@ -4,7 +4,7 @@ import logging
 import subprocess
 import sys
 import typing
-from os import path, walk
+from os import mkdir, path, walk
 from pathlib import Path
 
 # Codes
@@ -66,13 +66,36 @@ class Transtalor:
         for lang in self.languages:
             self.logger.info(
                 f'Creating translation `.po` file for language `{lang}`')
+
+            if not path.exists(f'{self.path}/locales'):
+                self.logger.info(
+                    f'Locales dir not found. Creating locales dir')
+                mkdir(f'{self.path}/locales/')
+            if not path.exists(f'{self.path}/locales/{lang}'):
+                self.logger.info(
+                    f'{lang} language dir not found. Creating {lang} dir')
+                mkdir(f'{self.path}/locales/{lang}/')
+            if not path.exists(f'{self.path}/locales/{lang}/LC_MESSAGES/'):
+                self.logger.info(
+                    f'LC_MESSAGES dir not found. Creating LC_MESSAGES dir')
+                mkdir(f'{self.path}/locales/{lang}/LC_MESSAGES/')
+
             command = ['xgettext', '--language=Python', '-d', self.domain, '-o',
-                       f'./locales/{lang}/LC_MESSAGES/{self.domain}.po', *self.get_python_files(self.path)]
+                       f'{self.path}/locales/{lang}/LC_MESSAGES/{self.domain}.po', *self.get_python_files(self.path)]
+
+            if path.exists(f'{self.path}/locales/{lang}/LC_MESSAGES/{self.domain}.po'):
+                self.logger.info(
+                    f'Previues `.po` file found. Adding `-j` to options.')
+                command.append('-j')
+
             subprocess.run(command)
 
-        command = ['xgettext', '--language=Python', '-d', self.domain, '-o',
-                   f'./locales/{self.domain}.pot', *self.get_python_files(self.path)]
-        subprocess.run(command)
+            with open(f'{self.path}/locales/{lang}/LC_MESSAGES/{self.domain}.po', 'r+') as file:
+                text = file.read()
+                file.seek(0)
+                text = text.replace("CHARSET", "UTF-8")
+                file.write(text)
+                file.truncate()
 
     def compile(self) -> None:
         self.logger.info(f'Translating python files with `msgfmt`')
