@@ -47,7 +47,6 @@ class Transtalor:
             sys.exit(1)
 
     def get_python_files(self, directory: str) -> typing.List[str]:
-        print(directory)
         self.logger.info(
             f'Getting python files in `{str(directory)}` directory')
         python_files = []
@@ -102,7 +101,7 @@ class Transtalor:
         for lang in self.languages:
             self.logger.info(f'Translating python files for language {lang}')
             command = ['msgfmt', '-o',
-                       f'locales/{lang}/LC_MESSAGES/{self.domain}.mo', f'locales/{lang}/LC_MESSAGES/{self.domain}.po']
+                       f'{self.path}/locales/{lang}/LC_MESSAGES/{self.domain}.mo', f'{self.path}/locales/{lang}/LC_MESSAGES/{self.domain}.po']
             subprocess.run(command)
 
     def __repr__(self) -> str:
@@ -122,6 +121,13 @@ if __name__ == "__main__":
         'INFO': logging.INFO,
         'DEBUG': logging.DEBUG,
         'NOTSET': logging.NOTSET,
+
+        'criticaL': logging.CRITICAL,
+        'erroR': logging.ERROR,
+        'warninG': logging.WARNING,
+        'infO': logging.INFO,
+        'debuG': logging.DEBUG,
+        'notseT': logging.NOTSET,
 
         'C': logging.CRITICAL,
         'E': logging.ERROR,
