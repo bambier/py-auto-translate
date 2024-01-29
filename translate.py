@@ -122,12 +122,12 @@ if __name__ == "__main__":
         'DEBUG': logging.DEBUG,
         'NOTSET': logging.NOTSET,
 
-        'criticaL': logging.CRITICAL,
-        'erroR': logging.ERROR,
-        'warninG': logging.WARNING,
-        'infO': logging.INFO,
-        'debuG': logging.DEBUG,
-        'notseT': logging.NOTSET,
+        'critical': logging.CRITICAL,
+        'error': logging.ERROR,
+        'warning': logging.WARNING,
+        'info': logging.INFO,
+        'debug': logging.DEBUG,
+        'notset': logging.NOTSET,
 
         'C': logging.CRITICAL,
         'E': logging.ERROR,
