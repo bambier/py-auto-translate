@@ -2,8 +2,12 @@
 Python Module to make translation files for all application python files 
 
 ### Usage
-```bash
-./translate.py -ll d -t -c -d com.domain
+```sh
+./translate.py --log-level DEBUG --translate --compile --domain com.domain --path ./src
+```
+or in short
+```sh
+./translate.py -ll d -t -c -d com.domain -p ./src
 ```
 
 
